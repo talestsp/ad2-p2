@@ -1,0 +1,12 @@
+1) Há picos sazonais (oscilações) de cançoes ou artistas no tempo? FAIL - info tempo
+
+2) Qual é o lugar que mais 'produz' artistas?
+
+3) Correlação entre hotness de tags de artistas?
+3) Quando o comportamento de uns estilos diante de uma ascenção de outro?
+
+4) Quais são as palavras mais comuns de cada estilo e quais são suas ocorrências?
+
+5) Qual é o artista que tem a maior média de familiaridade por musica?
+
+6) Comparar generos para saber qual possui mais familiaridade.
