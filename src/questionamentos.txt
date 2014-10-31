@@ -61,3 +61,9 @@
 	>>> ATRIBUTO artist_mbid
 	>>> ATRIBUTO artist_id
 	>>> ATRIBUTO artist_familiarity
+
+6) Há alguma similaridade de palavras de acordo com o paralelo que corta o lugar?
+	6a)
+	> Relação entre as palavras mais comuns separadas pela linha de paralelo de seu lugar.
+
+7) Qual é a polaridade por pais/regiao das musicas?
