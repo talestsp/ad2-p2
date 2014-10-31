@@ -53,6 +53,11 @@
 
 	> Uma tabela auxiliar, talvez um crawler, para encontrar a letra da musica
 
-5) Qual é o artista que tem a maior média de familiaridade por musica?
+5) Como está relacionada a alta produção musical de uma tag com sua familiaridade? 
+	5a)
+	É interessante para saber se há validade na ideia de que muita produção concorrente atrapalha a divulgação da musica
 
-6) Comparar generos para saber qual possui mais familiaridade.
+	> TABELA subset_track_metadata.db
+	>>> ATRIBUTO artist_mbid
+	>>> ATRIBUTO artist_id
+	>>> ATRIBUTO artist_familiarity
