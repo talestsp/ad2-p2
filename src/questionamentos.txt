@@ -24,8 +24,20 @@
 	> TXT simples artist_location
 	>>> LUGAR
 
-3) Correlação entre hotness de tags de artistas?
-3) Quando o comportamento de uns estilos diante de uma ascenção de outro?
+3) Correlação entre hotness médio de tags de artistas?
+	3a)
+	> É interessante saber se há alguma correlação entre o hotness medio das tags pareadas pelo ano de lançamento.
+	
+	3b)
+	> TABELA subset_track_metadata.db
+	>>> ATRIBUTO artist_mbid
+	>>> ATRIBUTO artist_id
+	>>> ATRIBUTO artist_hotttnesss
+	> TABELA subset_artist_term.db
+	>>> ATRIBUTO mb_tag
+
+	> TXT simples tracks_per_year
+	>>> ANO
 
 4) Quais são as palavras mais comuns de cada estilo e quais são suas ocorrências?
 
