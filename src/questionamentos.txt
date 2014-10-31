@@ -39,7 +39,19 @@
 	> TXT simples tracks_per_year
 	>>> ANO
 
-4) Quais são as palavras mais comuns de cada estilo e quais são suas ocorrências?
+4) Quais são as palavras mais comuns por lugares?
+	4a)
+	> O interessante desta questão é saber quais palavras são mais comuns dado o lugar do mundo de origem.
+	
+	4b)
+	> TABELA subset_track_metadata.db
+	>>> ATRIBUTO artist_id
+	>>> ATRIBUTO artist_name
+	
+	> TXT simples artist_location
+	>>> LUGAR
+
+	> Uma tabela auxiliar, talvez um crawler, para encontrar a letra da musica
 
 5) Qual é o artista que tem a maior média de familiaridade por musica?
 
