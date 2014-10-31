@@ -1,16 +1,28 @@
 1) Como são as oscilações da produção musical de determinada tag no tempo?
+	1a)
 	> Interessa aos adeptos do estilo conhecer a periodicidade do lançamento de suas músicas de interesse.
 
+	1b)
 	> TABELA subset_track_metadata.db
 	>>> ATRIBUTO artist_mbid
+	>>> ATRIBUTO artist_id
 	> TABELA subset_artist_term.db
 	>>> ATRIBUTO mb_tag
 
 	> TXT simples tracks_per_year
 	>>> ANO
 	
-2) Qual é o lugar que mais 'produz' artistas?
+2) Qual é o lugar que mais 'produz' artistas por tag?
+	2a)	
+	> Interessa à pessoa que curte o estilo
+
+	2b)
+	> TABELA subset_artist_term.db
+	>>> ATRIBUTO mb_tag
+	>>> ATRIBUTO artist_id
 	
+	> TXT simples artist_location
+	>>> LUGAR
 
 3) Correlação entre hotness de tags de artistas?
 3) Quando o comportamento de uns estilos diante de uma ascenção de outro?
