@@ -1,6 +1,16 @@
-1) Há picos sazonais (oscilações) de cançoes ou artistas no tempo? FAIL - info tempo
+1) Como são as oscilações da produção musical de determinada tag no tempo?
+	> Interessa aos adeptos do estilo conhecer a periodicidade do lançamento de suas músicas de interesse.
 
+	> TABELA subset_track_metadata.db
+	>>> ATRIBUTO artist_mbid
+	> TABELA subset_artist_term.db
+	>>> ATRIBUTO mb_tag
+
+	> TXT simples tracks_per_year
+	>>> ANO
+	
 2) Qual é o lugar que mais 'produz' artistas?
+	
 
 3) Correlação entre hotness de tags de artistas?
 3) Quando o comportamento de uns estilos diante de uma ascenção de outro?
