@@ -66,4 +66,18 @@
 	6a)
 	> Relação entre as palavras mais comuns separadas pela linha de paralelo de seu lugar.
 
-7) Qual é a polaridade por pais/regiao das musicas?
+7) Qual é a polaridade de humor por pais/regiao das musicas?
+	7a)
+	> Interessante saber quanto ao humor (mood) dos paises
+
+	7b)
+	> TABELA subset_track_metadata.db
+	>>> ATRIBUTO artist_id
+	>>> ATRIBUTO artist_name
+
+	> TXT simples artist_location
+	>>> LUGAR
+
+	> Crawler para colher as letras
+
+	> Algoritmo para atribuir polarização
