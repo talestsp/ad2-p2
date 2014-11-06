@@ -29,6 +29,17 @@ tags_count = aggregate(contador ~ mbtag, tags, FUN = sum)
 tags_count = tags_count[with(tags_count, order(-contador, mbtag)), ]
 row.names(tags_count) = NULL
 
+artists_usa = read.csv("../data/usa_artists.csv")
+songs_usa = songs_util[is.element(songs_util$artist_id, artists_usa$artist_id),]
+tags_usa = tags[is.element(tags$artist_id, songs_usa$artist_id),]
+row.names(tags_usa) = NULL
+
+tags_count_usa = aggregate(contador ~ mbtag, tags_usa, FUN = sum)
+tags_count_usa = tags_count_usa[with(tags_count_usa, order(-contador, mbtag)), ]
+row.names(tags_count_usa) = NULL
+
+population_usa = read.csv("../data/population_eua.csv")
+
 ```
 
 You can also embed plots, for example:
