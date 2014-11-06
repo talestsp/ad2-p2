@@ -14,6 +14,7 @@ Questão 1 - Como está relacionada a alta produção musical de uma tag com sua
 ```{r}
 #montando data.frames
 songs = read.csv("../data/songs.csv")
+tags = read.csv("../data/artist_mbtag.csv")
 songs_util = songs
 songs_util$title = NULL
 songs_util$release = NULL
@@ -23,9 +24,11 @@ songs_util$artist_mbid = NULL
 songs_util$artist_hotttnesss = NULL
 songs_util = songs_util[songs_util$year != 0,]
 row.names(songs_util) = NULL
+tags$contador = 1
+tags_count = aggregate(contador ~ mbtag, tags, FUN = sum)
+tags_count = tags_count[with(tags_count, order(-contador, mbtag)), ]
+row.names(tags_count) = NULL
 
-tags = read.csv("../data/artist_mbtag.csv")
-summary(cars)
 ```
 
 You can also embed plots, for example:
