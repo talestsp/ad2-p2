@@ -11,7 +11,7 @@ Questão 1 - Como está relacionada a alta produção musical de uma tag com sua
 É interessante para saber se há validade na afirmação de que muita produção concorrente atrapalha a divulgação da musica. Desta forma um grupo de adeptos do Rock, em um cenário onde há muita produção deste estilo, não daria atenção à todas as musicas lançadas, naturalmente, e priorizaria algumas.
 --
 
-```{r}
+```{r, echo=FALSE}
 #montando data.frames
 songs = read.csv("../data/songs.csv")
 tags = read.csv("../data/artist_mbtag.csv")
@@ -44,7 +44,7 @@ row.names(tags_count) = NULL
 ```
 
 Oranizando dados das músicas com tags "pop", "classic pop and rock", "rock and indie", "rock", "british", "american" e "folk" de 1998 até 2002 e de 2003 até 2007
-```{r}
+```{r, echo=FALSE}
 songs_pop = tags[tags$mbtag == ' pop',]
 songs_cl_pop_rock = tags[tags$mbtag == ' classic pop and rock',]
 songs_rock_indie = tags[tags$mbtag == ' rock and indie',]
@@ -61,14 +61,25 @@ british_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) &
 american_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_american$artist_id),]
 folk_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_folk$artist_id),]
 
-tag_production_fam = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_95_02), nrow(cl_pop_rock_95_02), nrow(indie_95_02), nrow(rock_95_02), nrow(british_95_02), nrow(american_95_02), nrow(folk_95_02)), "fam_mean" = c(mean(pop_95_02$artist_familiarity), mean(cl_pop_rock_95_02$artist_familiarity), mean(indie_95_02$artist_familiarity), mean(rock_95_02$artist_familiarity), mean(british_95_02$artist_familiarity), mean(american_95_02$artist_familiarity), mean(folk_95_02$artist_familiarity)))
+tag_production_fam_95_02 = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_95_02), nrow(cl_pop_rock_95_02), nrow(indie_95_02), nrow(rock_95_02), nrow(british_95_02), nrow(american_95_02), nrow(folk_95_02)), "fam_mean" = c(mean(pop_95_02$artist_familiarity), mean(cl_pop_rock_95_02$artist_familiarity), mean(indie_95_02$artist_familiarity), mean(rock_95_02$artist_familiarity), mean(british_95_02$artist_familiarity), mean(american_95_02$artist_familiarity), mean(folk_95_02$artist_familiarity)))
+
+pop_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_pop$artist_id),]
+cl_pop_rock_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_cl_pop_rock$artist_id),]
+indie_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_rock_indie$artist_id),]
+rock_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_rock$artist_id),]
+british_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_british$artist_id),]
+american_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_american$artist_id),]
+folk_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_folk$artist_id),]
+
+tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_03_07), nrow(cl_pop_rock_03_07), nrow(indie_03_07), nrow(rock_03_07), nrow(british_03_07), nrow(american_03_07), nrow(folk_03_07)), "fam_mean" = c(mean(pop_03_07$artist_familiarity), mean(cl_pop_rock_03_07$artist_familiarity), mean(indie_03_07$artist_familiarity), mean(rock_03_07$artist_familiarity), mean(british_03_07$artist_familiarity), mean(american_03_07$artist_familiarity), mean(folk_03_07$artist_familiarity)))
 
 
 
 ```
 
 
-```{r, echo=FALSE}
-
+```{r}
+cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
+cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
 ```
 

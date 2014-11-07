@@ -67,52 +67,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>#montando data.frames
-songs = read.csv(&quot;../data/songs.csv&quot;)
-tags = read.csv(&quot;../data/artist_mbtag.csv&quot;)
-songs_util = songs
-songs_util$title = NULL
-songs_util$release = NULL
-songs_util$artist_name = NULL
-songs_util$duration = NULL
-songs_util$artist_mbid = NULL
-songs_util$artist_hotttnesss = NULL
-songs_util = songs_util[songs_util$year != 0,]
-row.names(songs_util) = NULL
-tags$contador = 1
-tags_count = aggregate(contador ~ mbtag, tags, FUN = sum)
-tags_count = tags_count[with(tags_count, order(-contador, mbtag)), ]
-row.names(tags_count) = NULL
-
-#artists_usa = read.csv(&quot;../data/usa_artists.csv&quot;)
-#songs_usa = songs_util[is.element(songs_util$artist_id, artists_usa$artist_id),]
-#row.names(songs_usa) = NULL
-#tags_usa = tags[is.element(tags$artist_id, songs_usa$artist_id),]
-#row.names(tags_usa) = NULL
-
-#tags_count_usa = aggregate(contador ~ mbtag, tags_usa, FUN = sum)
-#tags_count_usa = tags_count_usa[with(tags_count_usa, order(-contador, mbtag)), ]
-#row.names(tags_count_usa) = NULL
-
-#population_usa = read.csv(&quot;../data/population_eua.csv&quot;)</code></pre>
 <p>Oranizando dados das músicas com tags “pop”, “classic pop and rock”, “rock and indie”, “rock”, “british”, “american” e “folk” de 1998 até 2002 e de 2003 até 2007</p>
-<pre class="r"><code>songs_pop = tags[tags$mbtag == ' pop',]
-songs_cl_pop_rock = tags[tags$mbtag == ' classic pop and rock',]
-songs_rock_indie = tags[tags$mbtag == ' rock and indie',]
-songs_rock = tags[tags$mbtag == ' rock',]
-songs_british = tags[tags$mbtag == ' british' | tags$mbtag == ' uk',]
-songs_american = tags[tags$mbtag == ' american' | tags$mbtag == ' usa',]
-songs_folk = tags[tags$mbtag == ' folk',]
-
-pop_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_pop$artist_id),]
-cl_pop_rock_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_cl_pop_rock$artist_id),]
-indie_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_rock_indie$artist_id),]
-rock_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_rock$artist_id),]
-british_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_british$artist_id),]
-american_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_american$artist_id),]
-folk_95_02 = songs_util[(songs_util$year &gt;= 1998 &amp; songs_util$year &lt;= 2002) &amp; is.element(songs_util$artist_id, songs_folk$artist_id),]
-
-tag_production_fam = data.frame(&quot;tag&quot; = c(&quot;pop&quot;, &quot;classic pop and rock&quot;, &quot;rock and indie&quot;, &quot;rock&quot;, &quot;british&quot;, &quot;american&quot;, &quot;folk&quot;), &quot;production&quot; = c(nrow(pop_95_02), nrow(cl_pop_rock_95_02), nrow(indie_95_02), nrow(rock_95_02), nrow(british_95_02), nrow(american_95_02), nrow(folk_95_02)), &quot;fam_mean&quot; = c(mean(pop_95_02$artist_familiarity), mean(cl_pop_rock_95_02$artist_familiarity), mean(indie_95_02$artist_familiarity), mean(rock_95_02$artist_familiarity), mean(british_95_02$artist_familiarity), mean(american_95_02$artist_familiarity), mean(folk_95_02$artist_familiarity)))</code></pre>
+<pre class="r"><code>cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = &quot;s&quot;)</code></pre>
+<pre><code>## [1] 0.6428571</code></pre>
+<pre class="r"><code>cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = &quot;s&quot;)</code></pre>
+<pre><code>## [1] 0.3571429</code></pre>
 </div>
 
 
