@@ -29,23 +29,46 @@ tags_count = aggregate(contador ~ mbtag, tags, FUN = sum)
 tags_count = tags_count[with(tags_count, order(-contador, mbtag)), ]
 row.names(tags_count) = NULL
 
-artists_usa = read.csv("../data/usa_artists.csv")
-songs_usa = songs_util[is.element(songs_util$artist_id, artists_usa$artist_id),]
-tags_usa = tags[is.element(tags$artist_id, songs_usa$artist_id),]
-row.names(tags_usa) = NULL
+#artists_usa = read.csv("../data/usa_artists.csv")
+#songs_usa = songs_util[is.element(songs_util$artist_id, artists_usa$artist_id),]
+#row.names(songs_usa) = NULL
+#tags_usa = tags[is.element(tags$artist_id, songs_usa$artist_id),]
+#row.names(tags_usa) = NULL
 
-tags_count_usa = aggregate(contador ~ mbtag, tags_usa, FUN = sum)
-tags_count_usa = tags_count_usa[with(tags_count_usa, order(-contador, mbtag)), ]
-row.names(tags_count_usa) = NULL
+#tags_count_usa = aggregate(contador ~ mbtag, tags_usa, FUN = sum)
+#tags_count_usa = tags_count_usa[with(tags_count_usa, order(-contador, mbtag)), ]
+#row.names(tags_count_usa) = NULL
 
-population_usa = read.csv("../data/population_eua.csv")
+#population_usa = read.csv("../data/population_eua.csv")
 
 ```
 
-You can also embed plots, for example:
+Oranizando dados das músicas com tags "pop", "classic pop and rock", "rock and indie", "rock", "british", "american" e "folk" de 1998 até 2002 e de 2003 até 2007
+```{r}
+songs_pop = tags[tags$mbtag == ' pop',]
+songs_cl_pop_rock = tags[tags$mbtag == ' classic pop and rock',]
+songs_rock_indie = tags[tags$mbtag == ' rock and indie',]
+songs_rock = tags[tags$mbtag == ' rock',]
+songs_british = tags[tags$mbtag == ' british' | tags$mbtag == ' uk',]
+songs_american = tags[tags$mbtag == ' american' | tags$mbtag == ' usa',]
+songs_folk = tags[tags$mbtag == ' folk',]
+
+pop_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_pop$artist_id),]
+cl_pop_rock_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_cl_pop_rock$artist_id),]
+indie_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_rock_indie$artist_id),]
+rock_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_rock$artist_id),]
+british_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_british$artist_id),]
+american_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_american$artist_id),]
+folk_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_folk$artist_id),]
+
+tag_production_fam = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_95_02), nrow(cl_pop_rock_95_02), nrow(indie_95_02), nrow(rock_95_02), nrow(british_95_02), nrow(american_95_02), nrow(folk_95_02)), "fam_mean" = c(mean(pop_95_02$artist_familiarity), mean(cl_pop_rock_95_02$artist_familiarity), mean(indie_95_02$artist_familiarity), mean(rock_95_02$artist_familiarity), mean(british_95_02$artist_familiarity), mean(american_95_02$artist_familiarity), mean(folk_95_02$artist_familiarity)))
+
+
+
+```
+
 
 ```{r, echo=FALSE}
-plot(cars)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
