@@ -84,12 +84,12 @@ tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "
 
 ```{r}
 tag_production_fam_95_02
-tag_production_fam_03_07
-
+ggparcoord(tag_production_fam_95_02, columns = c(2, 3), title = "1995 to 2002")
 cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
-cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
 
-ggparcoord(tag_production_fam_95_02, columns = c(1, 2))
+tag_production_fam_03_07
+ggparcoord(tag_production_fam_03_07, columns = c(2, 3), title = "2003 to 2007")
+cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
 
 ```
 
@@ -116,9 +116,14 @@ pol_pais = data.frame("artist_id" = pol_pais$artist_id, "song_id" = pol_pais$son
 en_speakers = read.csv("../data/english_speakers.csv")
 pol_pais = pol_pais[is.element(pol_pais$pais, en_speakers$pais),]
 row.names(pol_pais) = NULL
-
+pol_pais$contador = 1
+pais_qtd = aggregate(contador ~ pais, pol_pais, FUN = sum)
+pais_pol = aggregate(pol ~ pais, pol_pais, FUN = sum)
+pais_pol = merge(pais_pol, pais_qtd, "pais")
+pais_pol = pais_pol[with(pais_pol, order(-pais_pol$pol, pais_pol$contador)), ]
+row.names(pais_pol) = NULL
 ```
 
 ```{r}
-pais_pol = aggregate(pol ~ pais, pol_pais, FUN = sum)
+plot(pais_pol$pol, pais_pol$contador)
 ```
