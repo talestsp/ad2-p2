@@ -7,6 +7,9 @@ output: html_document
 ---
 A Million Song Dataset
 ---
+```{r, echo=FALSE}
+require("GGally")
+```
 
 --
 Questão 5 - Como está relacionada a alta produção musical de uma tag com sua familiaridade? 
@@ -77,7 +80,16 @@ folk_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is
 
 tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_03_07), nrow(cl_pop_rock_03_07), nrow(indie_03_07), nrow(rock_03_07), nrow(british_03_07), nrow(american_03_07), nrow(folk_03_07)), "fam_mean" = c(mean(pop_03_07$artist_familiarity), mean(cl_pop_rock_03_07$artist_familiarity), mean(indie_03_07$artist_familiarity), mean(rock_03_07$artist_familiarity), mean(british_03_07$artist_familiarity), mean(american_03_07$artist_familiarity), mean(folk_03_07$artist_familiarity)))
 
+```
 
+```{r}
+tag_production_fam_95_02
+tag_production_fam_03_07
+
+cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
+cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
+
+ggparcoord(tag_production_fam_95_02, columns = c(1, 2))
 
 ```
 
