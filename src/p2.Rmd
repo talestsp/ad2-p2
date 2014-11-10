@@ -3,21 +3,19 @@ title: "Problema2"
 author: "Tales Pimentel"
 date: "27-10-2014"
 output: html_document
-
 ---
 A Million Song Dataset
 ---
 ```{r, echo=FALSE}
 require("GGally")
+require("ggplot2")
 ```
-
 --
 Questão 5 - Como está relacionada a alta produção musical de uma tag com sua familiaridade? 
 --
 --
 É interessante para saber se há validade na afirmação de que muita produção concorrente atrapalha a divulgação da musica. Desta forma um grupo de adeptos do Rock, em um cenário onde há muita produção deste estilo, não daria atenção à todas as musicas lançadas, naturalmente, e priorizaria algumas.
 --
-
 ```{r, echo=FALSE}
 #montando data.frames
 songs = read.csv("../data/songs.csv")
@@ -35,21 +33,16 @@ tags$contador = 1
 tags_count = aggregate(contador ~ mbtag, tags, FUN = sum)
 tags_count = tags_count[with(tags_count, order(-contador, mbtag)), ]
 row.names(tags_count) = NULL
-
 #artists_usa = read.csv("../data/usa_artists.csv")
 #songs_usa = songs_util[is.element(songs_util$artist_id, artists_usa$artist_id),]
 #row.names(songs_usa) = NULL
 #tags_usa = tags[is.element(tags$artist_id, songs_usa$artist_id),]
 #row.names(tags_usa) = NULL
-
 #tags_count_usa = aggregate(contador ~ mbtag, tags_usa, FUN = sum)
 #tags_count_usa = tags_count_usa[with(tags_count_usa, order(-contador, mbtag)), ]
 #row.names(tags_count_usa) = NULL
-
 #population_usa = read.csv("../data/population_eua.csv")
-
 ```
-
 Oranizando dados das músicas com tags "pop", "classic pop and rock", "rock and indie", "rock", "british", "american" e "folk" de 1998 até 2002 e de 2003 até 2007
 ```{r, echo=FALSE}
 songs_pop = tags[tags$mbtag == ' pop',]
@@ -59,7 +52,6 @@ songs_rock = tags[tags$mbtag == ' rock',]
 songs_british = tags[tags$mbtag == ' british' | tags$mbtag == ' uk',]
 songs_american = tags[tags$mbtag == ' american' | tags$mbtag == ' usa',]
 songs_folk = tags[tags$mbtag == ' folk',]
-
 pop_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_pop$artist_id),]
 cl_pop_rock_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_cl_pop_rock$artist_id),]
 indie_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_rock_indie$artist_id),]
@@ -67,9 +59,7 @@ rock_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is
 british_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_british$artist_id),]
 american_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_american$artist_id),]
 folk_95_02 = songs_util[(songs_util$year >= 1998 & songs_util$year <= 2002) & is.element(songs_util$artist_id, songs_folk$artist_id),]
-
 tag_production_fam_95_02 = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_95_02), nrow(cl_pop_rock_95_02), nrow(indie_95_02), nrow(rock_95_02), nrow(british_95_02), nrow(american_95_02), nrow(folk_95_02)), "fam_mean" = c(mean(pop_95_02$artist_familiarity), mean(cl_pop_rock_95_02$artist_familiarity), mean(indie_95_02$artist_familiarity), mean(rock_95_02$artist_familiarity), mean(british_95_02$artist_familiarity), mean(american_95_02$artist_familiarity), mean(folk_95_02$artist_familiarity)))
-
 pop_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_pop$artist_id),]
 cl_pop_rock_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_cl_pop_rock$artist_id),]
 indie_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_rock_indie$artist_id),]
@@ -77,20 +67,15 @@ rock_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is
 british_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_british$artist_id),]
 american_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_american$artist_id),]
 folk_03_07 = songs_util[(songs_util$year >= 2003 & songs_util$year <= 2007) & is.element(songs_util$artist_id, songs_folk$artist_id),]
-
 tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "rock and indie", "rock", "british", "american", "folk"), "production" = c(nrow(pop_03_07), nrow(cl_pop_rock_03_07), nrow(indie_03_07), nrow(rock_03_07), nrow(british_03_07), nrow(american_03_07), nrow(folk_03_07)), "fam_mean" = c(mean(pop_03_07$artist_familiarity), mean(cl_pop_rock_03_07$artist_familiarity), mean(indie_03_07$artist_familiarity), mean(rock_03_07$artist_familiarity), mean(british_03_07$artist_familiarity), mean(american_03_07$artist_familiarity), mean(folk_03_07$artist_familiarity)))
-
 ```
-
 ```{r}
 tag_production_fam_95_02
-ggparcoord(tag_production_fam_95_02, columns = c(2, 3), title = "1995 to 2002")
+ggparcoord(tag_production_fam_95_02, columns = c(2,3), title = "1995 to 2002", groupColumn = 1, mapping = aes(size = 3))
 #cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
-
 tag_production_fam_03_07
-ggparcoord(tag_production_fam_03_07, columns = c(2, 3), title = "2003 to 2007")
+ggparcoord(tag_production_fam_03_07, columns = c(2, 3), title = "2003 to 2007", groupColumn = 1, mapping = aes(size = 3))
 #cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
-
 ```
 --
 É interessante notar que no período de 1995 a 2002 parece haver uma pequena evidência que confirma a hipótese sob investigação. Especialmente se consideramos dois grupos de tags.
@@ -119,15 +104,12 @@ Questão 7 - Qual é a polaridade de humor por pais/regiao das musicas?
 Há alguns estereótipos de que países tendem a ter uma característica positiva ou negativa quanto à análise de suas letras. Um exemplo clássico disto seria Portugal com seus fados extremamente melancólicos enquanto que o Axé Music e Carnaval tendem a elevar a polaridade das músicas brasileiras.
 Neste roteiro, não será analisados os casos de músicas brasileiras, apenas serão vistas as composições em inglês.
 --
-
 ```{r, echo=FALSE}
 songs = read.csv("../data/songs.csv")
 songs_loc = read.csv("../data/subset_artist_location.csv")
-
 polaridade = read.csv("../data/polaridade.csv")
 polaridade = polaridade[polaridade$pol != 0,]
 row.names(polaridade) = NULL
-
 pol_id_grupo = merge(polaridade, songs, by.x = "V1", by.y = "song_id")
 pol_id_grupo = data.frame("artist_id" = pol_id_grupo$artist_id, "song_id" = pol_id_grupo$V1, "pol" = pol_id_grupo$pol)
 pol_pais = merge(pol_id_grupo, songs_loc, by.x = "artist_id", by.y = "V1")
@@ -142,7 +124,6 @@ pais_pol = merge(pais_pol, pais_qtd, "pais")
 pais_pol = pais_pol[with(pais_pol, order(-pais_pol$pol, pais_pol$contador)), ]
 row.names(pais_pol) = NULL
 ```
-
 ```{r}
 plot(pais_pol$pol, pais_pol$contador)
 ```
