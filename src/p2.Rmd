@@ -3,10 +3,14 @@ title: "Problema2"
 author: "Tales Pimentel"
 date: "27-10-2014"
 output: html_document
+
+---
+A Million Song Dataset
 ---
 
-Questão 1 - Como está relacionada a alta produção musical de uma tag com sua familiaridade? 
----
+--
+Questão 5 - Como está relacionada a alta produção musical de uma tag com sua familiaridade? 
+--
 --
 É interessante para saber se há validade na afirmação de que muita produção concorrente atrapalha a divulgação da musica. Desta forma um grupo de adeptos do Rock, em um cenário onde há muita produção deste estilo, não daria atenção à todas as musicas lançadas, naturalmente, e priorizaria algumas.
 --
@@ -77,9 +81,32 @@ tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "
 
 ```
 
+--
+Questão 7 - Qual é a polaridade de humor por pais/regiao das musicas?
+--
+--
+Há alguns estereótipos de que países tendem a ter uma característica positiva ou negativa quanto à análise de suas letras. Um exemplo clássico disto seria Portugal com seus fados extremamente melancólicos enquanto que o Axé Music e Carnaval tendem a elevar a polaridade das músicas brasileiras.
+Neste roteiro, não será analisados os casos de músicas brasileiras, apenas serão vistas as composições em inglês.
+--
 
-```{r}
-cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
-cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
+```{r, echo=FALSE}
+songs = read.csv("../data/songs.csv")
+songs_loc = read.csv("../data/subset_artist_location.csv")
+
+polaridade = read.csv("../data/polaridade.csv")
+polaridade = polaridade[polaridade$pol != 0,]
+row.names(polaridade) = NULL
+
+pol_id_grupo = merge(polaridade, songs, by.x = "V1", by.y = "song_id")
+pol_id_grupo = data.frame("artist_id" = pol_id_grupo$artist_id, "song_id" = pol_id_grupo$V1, "pol" = pol_id_grupo$pol)
+pol_pais = merge(pol_id_grupo, songs_loc, by.x = "artist_id", by.y = "V1")
+pol_pais = data.frame("artist_id" = pol_pais$artist_id, "song_id" = pol_pais$song_id, "pol" = pol_pais$pol, "pais" = pol_pais$V6)
+en_speakers = read.csv("../data/english_speakers.csv")
+pol_pais = pol_pais[is.element(pol_pais$pais, en_speakers$pais),]
+row.names(pol_pais) = NULL
+
 ```
 
+```{r}
+pais_pol = aggregate(pol ~ pais, pol_pais, FUN = sum)
+```

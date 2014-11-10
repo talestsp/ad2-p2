@@ -58,8 +58,15 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 
 
-<div id="questao-1---como-esta-relacionada-a-alta-producao-musical-de-uma-tag-com-sua-familiaridade" class="section level2">
-<h2>Questão 1 - Como está relacionada a alta produção musical de uma tag com sua familiaridade?</h2>
+<div id="a-million-song-dataset" class="section level2">
+<h2>A Million Song Dataset</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Questão 5 - Como está relacionada a alta produção musical de uma tag com sua familiaridade?</td>
+</tr>
+</tbody>
+</table>
 <table>
 <tbody>
 <tr class="odd">
@@ -68,10 +75,24 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </tbody>
 </table>
 <p>Oranizando dados das músicas com tags “pop”, “classic pop and rock”, “rock and indie”, “rock”, “british”, “american” e “folk” de 1998 até 2002 e de 2003 até 2007</p>
-<pre class="r"><code>cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = &quot;s&quot;)</code></pre>
-<pre><code>## [1] 0.6428571</code></pre>
-<pre class="r"><code>cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = &quot;s&quot;)</code></pre>
-<pre><code>## [1] 0.3571429</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Questão 7 - Qual é a polaridade de humor por pais/regiao das musicas?</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Há alguns estereótipos de que países tendem a ter uma característica positiva ou negativa quanto à análise de suas letras. Um exemplo clássico disto seria Portugal com seus fados extremamente melancólicos enquanto que o Axé Music e Carnaval tendem a elevar a polaridade das músicas brasileiras.</td>
+</tr>
+<tr class="even">
+<td align="left">Neste roteiro, não será analisados os casos de músicas brasileiras, apenas serão vistas as composições em inglês.</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pais_pol = aggregate(pol ~ pais, pol_pais, FUN = sum)</code></pre>
 </div>
 
 
