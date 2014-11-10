@@ -85,14 +85,33 @@ tag_production_fam_03_07 = data.frame("tag" = c("pop", "classic pop and rock", "
 ```{r}
 tag_production_fam_95_02
 ggparcoord(tag_production_fam_95_02, columns = c(2, 3), title = "1995 to 2002")
-cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
+#cor(tag_production_fam_95_02$production, tag_production_fam_95_02$fam_mean, method = "s")
 
 tag_production_fam_03_07
 ggparcoord(tag_production_fam_03_07, columns = c(2, 3), title = "2003 to 2007")
-cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
+#cor(tag_production_fam_03_07$production, tag_production_fam_03_07$fam_mean, method = "s")
 
 ```
-
+--
+É interessante notar que no período de 1995 a 2002 parece haver uma pequena evidência que confirma a hipótese sob investigação. Especialmente se consideramos dois grupos de tags.
+Grupo1 = (American, Rock, Rock and Indie).
+Grupo2 = (British, Classic Pop and Rock, Folk, Pop).
+A evidência se dá pela observação de que a familiaridade média (das canções) das tags tendem a ser maior quando sua produção é menor em cada grupo.
+--
+--
+Já no período que compreende 2003 a 2007 parece haver uma manutenção do ranking de produção musical com a familiaridade média (das canções) das tags. Apenas duas tags fogem à esta manutenção: American e Pop.
+Grupo = (American, Rock, Rock and Indie, British, Classic And Pop, Pop, Folk)
+--
+--
+Curiosidades:
+--
+--
+1) A correlação de Spearman, que leva em consideração o ranking, indica um valor baixo para os dados de 2003 a 2007: 0.36
+--
+--
+2) A correlação de Spearman do periodo de 1995 a 2002 resulta em 0.64, havendo mais alterações de posição que nos dados de 1995 a 2002.
+===/===/===/===/===/===/===/===/===/===
+--
 --
 Questão 7 - Qual é a polaridade de humor por pais/regiao das musicas?
 --
@@ -127,3 +146,11 @@ row.names(pais_pol) = NULL
 ```{r}
 plot(pais_pol$pol, pais_pol$contador)
 ```
+--
+--
+O resultado inferido por esta análise parece estar tendencioso por dois motivos.
+--
+--
+1) Quanto maior a produção musical, menor polaridade. Será que quanto mais composições mais se expõe a tristeza daquele lugar? rs
+2) A classificação da polaridade foi feita considerando apenas o título, desta forma muitos títulos resultaram em polariade 0 e foram ignorados. Estes resultados se dão por que o título possui poucas palavras e muitas vezes são palavras apolares.
+--
